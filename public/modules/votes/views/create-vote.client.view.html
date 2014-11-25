@@ -10,6 +10,14 @@
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
                     </div>
+                    <label class="control-label" for="option">Options</label>
+                    <div data-ng-repeat="option in voteoptions">
+                        <input type="text" data-ng-model="option.value" id="{{option.id}}" placeholder="{{option.name}}" required>
+                        <a class="btn btn-primary" data-ng-click="removeOption(option.id);">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </div>
+                    <button type="button" data-ng-click="addOption()">Add option</button>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">

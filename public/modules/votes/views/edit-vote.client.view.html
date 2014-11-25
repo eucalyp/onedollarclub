@@ -3,20 +3,28 @@
         <h1>Edit Vote</h1>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+        <form name="voteForm" class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+                    <label class="control-label" for="title">Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="vote.name" id="name" class="form-control" placeholder="Name" required>
+                        <input name="title" type="text" data-ng-model="vote.name" id="title" class="form-control" placeholder="Title" required>
                     </div>
+                    <label class="control-label" for="option">Options</label>
+                    <div data-ng-repeat="option in vote.voteoptions">
+                        <input type="text" data-ng-model="option.value" id="{{option.id}}" placeholder="{{option.name}}" required>
+                        <a class="btn btn-primary" data-ng-click="removeOption({{$index}});">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </div>
+                    <button type="button" data-ng-click="addOption()">Add option</button>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
             </fieldset>
         </form>
     </div>

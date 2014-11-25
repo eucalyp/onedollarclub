@@ -4,12 +4,14 @@
 angular.module('votes').controller('VotesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Votes',
 	function($scope, $stateParams, $location, Authentication, Votes) {
 		$scope.authentication = Authentication;
+		$scope.voteoptions = [];
 
 		// Create new Vote
 		$scope.create = function() {
 			// Create new Vote object
 			var vote = new Votes ({
-				name: this.name
+				name: this.name,
+				voteoptions: this.voteoptions
 			});
 
 			// Redirect after save
@@ -60,7 +62,21 @@ angular.module('votes').controller('VotesController', ['$scope', '$stateParams',
 		$scope.findOne = function() {
 			$scope.vote = Votes.get({ 
 				voteId: $stateParams.voteId
+			}, function() {
+				$scope.voteoptions = $scope.vote.voteoptions;
 			});
+		};
+
+		$scope.addOption = function() {
+			var id = $scope.voteoptions.length+1;
+			$scope.voteoptions.push({
+				name: "option "+id,
+				id: $scope.vote._id+"_"+id
+			})
+		};
+
+		$scope.removeOption = function(index) {
+			$scope.voteoptions.splice(index, 1);
 		};
 	}
 ]);

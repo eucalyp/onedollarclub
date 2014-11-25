@@ -16,6 +16,10 @@ var VoteSchema = new Schema({
 		required: 'Please fill Vote name',
 		trim: true
 	},
+	voteoptions: {
+		type: Array,
+		required: 'Please define Vote options'
+	},
 	created: {
 		type: Date,
 		default: Date.now
