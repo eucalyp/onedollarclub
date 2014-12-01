@@ -1,10 +1,10 @@
-<section data-ng-controller="VotesController" data-ng-init="findOne()">
+	<section data-ng-controller="VotesController" data-ng-init="findOne()">
 	<div class="page-header">
 		<h1 data-ng-bind="vote.name"></h1>
 	</div>
 	<div>
 		<div data-ng-repeat="option in vote.voteoptions">
-	        <input type="radio" data-ng-model="option.value" id="{{option.name}}" placeholder="{{option.placeholder}}" required>{{option.value}}
+	        <input type="radio" id="{{option.name}}" name="option" data-ng-model="$parent.ballot" data-ng-value="option.name" required>{{option.value}}
 	    </div>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == vote.user._id))">
@@ -13,6 +13,9 @@
 		</a>
 		<a class="btn btn-primary" data-ng-click="remove();">
 			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="addBallot();">
+			vote
 		</a>
 	</div>
 	<small>

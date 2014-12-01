@@ -17,8 +17,7 @@ var VoteSchema = new Schema({
 		trim: true
 	},
 	voteoptions: {
-		type: Array,
-		required: 'Please define Vote options'
+		type: Array
 	},
 	created: {
 		type: Date,
@@ -27,6 +26,10 @@ var VoteSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	ballot: {
+		type: Schema.ObjectId,
+		ref: 'Ballot'
 	}
 });
 

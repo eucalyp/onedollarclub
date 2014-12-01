@@ -1,8 +1,8 @@
 'use strict';
 
 // Votes controller
-angular.module('votes').controller('VotesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Votes',
-	function($scope, $stateParams, $location, Authentication, Votes) {
+angular.module('votes').controller('VotesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Votes', 'Ballots',
+	function($scope, $stateParams, $location, Authentication, Votes, Ballots) {
 		$scope.authentication = Authentication;
 		$scope.voteoptions = [];
 
@@ -65,18 +65,31 @@ angular.module('votes').controller('VotesController', ['$scope', '$stateParams',
 			}, function() {
 				$scope.voteoptions = $scope.vote.voteoptions;
 			});
+
+			$scope.ballot = 'testt';
 		};
 
 		$scope.addOption = function() {
 			var id = $scope.voteoptions.length+1;
 			$scope.voteoptions.push({
-				name: "option "+id,
-				id: $scope.vote._id+"_"+id
-			})
+				name: 'option '+id,
+				id: id
+			});
 		};
 
 		$scope.removeOption = function(index) {
 			$scope.voteoptions.splice(index, 1);
+		};
+
+		$scope.addBallot = function() {
+			var ballot = new Ballots({
+				choice: $scope.ballot,
+				vote: $scope.vote._id
+			});
+			ballot.$save(function(response) {
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
 		};
 	}
 ]);

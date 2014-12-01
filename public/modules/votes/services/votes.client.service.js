@@ -11,3 +11,14 @@ angular.module('votes').factory('Votes', ['$resource',
 		});
 	}
 ]);
+
+angular.module('votes').factory('Ballots', ['$resource',
+    function($resource) {
+        return $resource('ballots/:ballotId', { ballotId: '@_id'
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    }
+]);
